@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dados em Tempo Real</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function atualizarDados() {
+            $.ajax({
+                url: '/dados',
+                type: 'GET',
+                success: function(data) {
+                    $('#temperatura').text(data.temperatura.toFixed(2) + ' °C');
+                    $('#umidade').text(data.umidade.toFixed(2) + ' %');
+                    $('#luminosidade').text(data.luminosidade.toFixed(2) + ' lux');
+                    setTimeout(atualizarDados, 1);  // Atualiza a cada segundo
+                }
+            });
+        }
+        $(document).ready(function() {
+            atualizarDados();
+        });
+    </script>
+</head>
+<body>
+    <h1>Dados em Tempo Real</h1>
+    <p>Temperatura: <span id="temperatura">--</span></p>
+    <p>Umidade: <span id="umidade">--</span></p>
+    <p>Luminosidade: <span id="luminosidade">--</span></p>
+</body>
+</html>

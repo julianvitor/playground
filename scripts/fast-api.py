@@ -7,8 +7,6 @@ request_count = 0
 
 @app.get('/fastapi')
 def read_root():
-    global request_count
-    request_count += 1
     return {"message": "Hello from FastAPI!"}
 
 if __name__ == '__main__':

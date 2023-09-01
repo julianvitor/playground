@@ -1,30 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dados em Tempo Real</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Benchmark Results</title>
     <script>
-        function atualizarDados() {
-            $.ajax({
-                url: '/dados',
-                type: 'GET',
-                success: function(data) {
-                    $('#temperatura').text(data.temperatura.toFixed(2) + ' °C');
-                    $('#umidade').text(data.umidade.toFixed(2) + ' %');
-                    $('#luminosidade').text(data.luminosidade.toFixed(2) + ' lux');
-                    setTimeout(atualizarDados, 1);  // Atualiza a cada segundo
+        var flaskRequestCount = 0;
+        var goRequestCount = 0;
+
+        function makeRequest(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    callback();
                 }
-            });
+            };
+            xhr.open("GET", url, true);
+            xhr.send();
         }
-        $(document).ready(function() {
-            atualizarDados();
-        });
+
+        function startBenchmark() {
+            var startTime = Date.now();
+            var interval = 10; // Milissegundos entre as solicitações
+            var totalRequests = 0;
+
+            function sendRequests() {
+                makeRequest('/flask', function() {
+                    flaskRequestCount++;
+                    totalRequests++;
+                    document.getElementById('flask-count').textContent = flaskRequestCount;
+                });
+                makeRequest('/go', function() {
+                    goRequestCount++;
+                    totalRequests++;
+                    document.getElementById('go-count').textContent = goRequestCount;
+                });
+
+                var currentTime = Date.now();
+                if (currentTime - startTime < 5000) { // Teste por 5 segundos
+                    setTimeout(sendRequests, interval);
+                } else {
+                    alert('Benchmark concluído. Total de solicitações: ' + totalRequests);
+                }
+            }
+
+            sendRequests();
+        }
     </script>
 </head>
 <body>
-    <h1>Dados em Tempo Real</h1>
-    <p>Temperatura: <span id="temperatura">--</span></p>
-    <p>Umidade: <span id="umidade">--</span></p>
-    <p>Luminosidade: <span id="luminosidade">--</span></p>
+    <h1>Benchmark Results</h1>
+    <button onclick="startBenchmark()">Iniciar Benchmark</button>
+    <h2>Flask (Python)</h2>
+    <p>Total de solicitações: <span id="flask-count">0</span></p>
+    <h2>Go</h2>
+    <p>Total de solicitações: <span id="go-count">0</span></p>
 </body>
 </html>

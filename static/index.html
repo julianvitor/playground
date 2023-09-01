@@ -1,149 +1,57 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Vídeo e Opinião</title>
-    <style>
-        body {
-            background-color: #ffffff;
-            color: #000000;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            transition: background-color 1s, color 0.5s;
-        }
-
-        body.dark-mode {
-            background-color: #181818;
-            color: #ffffff;
-        }
-
-        h2 {
-            color: #3498db;
-        }
-
-        h3 {
-            color: #3498db;
-            margin-top: 20px;
-        }
-
-        iframe {
-            border-radius: 10px; /* Rounded corners added */
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-
-        .button {
-            background-color: #3498db;
-            color: #ffffff;
-            border: none;
-            border-radius: 20px;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .button:hover {
-            background-color: #2980b9;
-            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .switch {
-            position: relative;
-            display: inline-block;
-            width: 40px;
-            height: 20px;
-            margin-top: 10px;
-        }
-
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: 0.4s;
-            border-radius: 20px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 16px;
-            width: 16px;
-            left: 2px;
-            bottom: 2px;
-            background-color: white;
-            transition: 0.4s;
-            border-radius: 50%;
-        }
-
-        input:checked + .slider {
-            background-color: #3498db;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(20px);
-        }
-    </style>
-</head>
-<body>
-    <h2>Assista ao vídeo</h2>
-    <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/xcJtL7QggTI?si=uFAYWfoVvJjCdUae" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-    <h3>Você gostou do vídeo?</h3>
-    <div class="button-container">
-        <button class="button" onclick="enviarOpiniao(true)">Gostei</button>
-        <button class="button" onclick="enviarOpiniao(false)">Não gostei</button>
-    </div>
-
-    <h3>Modo:</h3>
-    <label class="switch">
-        <input type="checkbox" id="darkModeSwitch" onclick="toggleDarkMode()">
-        <span class="slider"></span>
-    </label>
-
+    <title>Benchmark Results</title>
     <script>
-        function enviarOpiniao(gostou) {
-            fetch('/like', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: 'liked=' + gostou
-            }).then(response => {
-                console.log('Opinião enviada: ' + (gostou ? 'Gostei' : 'Não gostei'));
-            }).catch(error => {
-                console.error('Erro ao enviar opinião:', error);
-            });
+        var flaskRequestCount = 0;
+        var goRequestCount = 0;
+
+        function makeRequest(url, callback) {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    callback();
+                }
+            };
+            xhr.open("GET", url, true);
+            xhr.send();
         }
 
-        function toggleDarkMode() {
-            const body = document.body;
-            const darkModeSwitch = document.getElementById('darkModeSwitch');
-            if (darkModeSwitch.checked) {
-                body.classList.add('dark-mode');
-            } else {
-                body.classList.remove('dark-mode');
+        function startBenchmark() {
+            var startTime = Date.now();
+            var interval = 10; // Milissegundos entre as solicitações
+            var totalRequests = 0;
+
+            function sendRequests() {
+                makeRequest('/flask', function() {
+                    flaskRequestCount++;
+                    totalRequests++;
+                    document.getElementById('flask-count').textContent = flaskRequestCount;
+                });
+                makeRequest('/go', function() {
+                    goRequestCount++;
+                    totalRequests++;
+                    document.getElementById('go-count').textContent = goRequestCount;
+                });
+
+                var currentTime = Date.now();
+                if (currentTime - startTime < 5000) { // Teste por 5 segundos
+                    setTimeout(sendRequests, interval);
+                } else {
+                    alert('Benchmark concluído. Total de solicitações: ' + totalRequests);
+                }
             }
+
+            sendRequests();
         }
     </script>
+</head>
+<body>
+    <h1>Benchmark Results</h1>
+    <button onclick="startBenchmark()">Iniciar Benchmark</button>
+    <h2>Flask (Python)</h2>
+    <p>Total de solicitações: <span id="flask-count">0</span></p>
+    <h2>Go</h2>
+    <p>Total de solicitações: <span id="go-count">0</span></p>
 </body>
 </html>

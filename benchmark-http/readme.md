@@ -1,18 +1,14 @@
-
-Aqui está a documentação técnica do script de benchmark do backend:
-
-Documentação Técnica do Script de Benchmark Backend
 Este é um script Python que realiza benchmarks de desempenho em diferentes servidores web, incluindo Flask, Go, FastAPI e servidores adicionais em C e Node.js. Ele mede o tempo de resposta e as solicitações por segundo para cada servidor e calcula a porcentagem de desempenho em relação ao Flask.
 
 Requisitos
 Python 3.x instalado no sistema.
-Acesso aos servidores Flask, Go, FastAPI, C e Node.js que serão benchmarkados.
+Acesso aos servidores Flask, Go, FastAPI, C e Node.js que serão comparados.
 O utilitário "curl" deve estar instalado no sistema para realizar as solicitações HTTP.
 Configuração
 O script requer algumas configurações iniciais:
 
 num_requests: O número de solicitações a serem feitas a cada servidor durante o benchmark.
-URLs dos servidores que serão benchmarkados: Certifique-se de atualizar as URLs dos servidores Flask, Go, FastAPI, C e Node.js de acordo com sua configuração.
+URLs dos servidores que serão comparados: Certifique-se de atualizar as URLs dos servidores Flask, Go, FastAPI, C e Node.js de acordo com sua configuração.
 Funções Principais
 run_benchmark(url)
 Esta função realiza o benchmark de um servidor específico. Ela faz o seguinte:

@@ -57,6 +57,7 @@ dkms.conf
 *.dll
 *.so
 *.dylib
+.Identifier
 
 # Test binary, built with `go test -c`
 *.test
@@ -343,3 +344,7 @@ dmypy.json
 cython_debug/
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#C,Go,Node,Video,Python
+
+# outras pastas
+playground/
+

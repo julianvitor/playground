@@ -6,6 +6,9 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
+#define MAX_BUFFER_SIZE 1024
+#define MAX_RESPONSE_SIZE 2048
+
 void error(const char *msg) {
     perror(msg);
     exit(1);
@@ -14,7 +17,7 @@ void error(const char *msg) {
 int main(int argc, char *argv[]) {
     int sockfd, newsockfd, portno;
     socklen_t clilen;
-    char buffer[1024];
+    char buffer[MAX_BUFFER_SIZE];
     struct sockaddr_in serv_addr, cli_addr;
     int n;
 
@@ -66,20 +69,12 @@ int main(int argc, char *argv[]) {
             "{\"nome\": \"Camila\", \"idade\": 26, \"endereco\": \"Rua J, Cidade J\", \"telefone\": \"(00) 8765-4321\", \"cpf\": \"876.567.123-10\"}"
         "]";
 
-        // Configurar os cabeçalhos da resposta HTTP
-        const char *response = "HTTP/1.1 200 OK\r\n"
-                               "Content-Type: application/json\r\n"
-                               "Content-Length: ";
-
-        char content_length[20];
-        sprintf(content_length, "%ld", strlen(json_response));
-
-        // Concatenar o cabeçalho Content-Length
-        strcat(response, content_length);
-        strcat(response, "\r\n\r\n");
-
-        // Concatenar o JSON de resposta
-        strcat(response, json_response);
+        // Construir a resposta HTTP
+        char response[MAX_RESPONSE_SIZE];
+        snprintf(response, sizeof(response), "HTTP/1.1 200 OK\r\n"
+                                            "Content-Type: application/json\r\n"
+                                            "Content-Length: %ld\r\n\r\n%s",
+                 strlen(json_response), json_response);
 
         n = write(newsockfd, response, strlen(response));
         if (n < 0)

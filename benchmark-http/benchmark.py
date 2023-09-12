@@ -2,7 +2,7 @@ import subprocess
 import time
 
 # Número de solicitações para cada servidor
-num_requests = 1500
+num_requests = 3000
 
 # URLs dos servidores Flask, Go, FastAPI e os servidores adicionais em C, Node.js e bun
 flask_url = 'http://localhost:5000/flask'

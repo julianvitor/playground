@@ -1,57 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Benchmark Results</title>
-    <script>
-        var flaskRequestCount = 0;
-        var goRequestCount = 0;
-
-        function makeRequest(url, callback) {
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    callback();
-                }
-            };
-            xhr.open("GET", url, true);
-            xhr.send();
-        }
-
-        function startBenchmark() {
-            var startTime = Date.now();
-            var interval = 10; // Milissegundos entre as solicitações
-            var totalRequests = 0;
-
-            function sendRequests() {
-                makeRequest('/flask', function() {
-                    flaskRequestCount++;
-                    totalRequests++;
-                    document.getElementById('flask-count').textContent = flaskRequestCount;
-                });
-                makeRequest('/go', function() {
-                    goRequestCount++;
-                    totalRequests++;
-                    document.getElementById('go-count').textContent = goRequestCount;
-                });
-
-                var currentTime = Date.now();
-                if (currentTime - startTime < 5000) { // Teste por 5 segundos
-                    setTimeout(sendRequests, interval);
-                } else {
-                    alert('Benchmark concluído. Total de solicitações: ' + totalRequests);
-                }
-            }
-
-            sendRequests();
-        }
-    </script>
+    <title>Verificar Número Primo</title>
 </head>
 <body>
-    <h1>Benchmark Results</h1>
-    <button onclick="startBenchmark()">Iniciar Benchmark</button>
-    <h2>Flask (Python)</h2>
-    <p>Total de solicitações: <span id="flask-count">0</span></p>
-    <h2>Go</h2>
-    <p>Total de solicitações: <span id="go-count">0</span></p>
+    <h1>Verificar Número Primo</h1>
+    <form method="POST">
+        <label for="number">Digite um número:</label>
+        <input type="number" name="number" required>
+        <input type="submit" value="Verificar">
+    </form>
+    {% if result %}
+    <p>{{ result }}</p>
+    {% endif %}
 </body>
 </html>

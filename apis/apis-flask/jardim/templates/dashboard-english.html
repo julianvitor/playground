@@ -3,11 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to the Smart Vegetable Garden Dashboard.
+    Monitor and control the air and soil sensors, electricity, reservoirs, and environmental sensors of your garden conveniently and efficiently.
+    Water your plants manually with a single click. 
+    Switch between light and dark modes for a personalized experience.">
+    <script>
+        // Função para carregar a fonte assincronamente
+        function loadFontAsync() {
+          const link = document.createElement('link');
+          link.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+          link.rel = 'stylesheet';
+          document.head.appendChild(link);
+        }
+      
+        // Chame a função para carregar a fonte assim que o DOM estiver pronto
+        document.addEventListener('DOMContentLoaded', loadFontAsync);
+      </script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="icon" href="{{ url_for('static', filename='icon.png') }}" type="image/x-icon">
 
     <title>Smart Vegetable Garden Dashboard</title>
+    <style>
+        /* Estilos críticos */
+        body {
+            background-color: #9f9f9f;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <div class="container center-container">
@@ -133,7 +162,7 @@
         fetchSensorData();
 
         // Set up a timer to fetch sensor data periodically (e.g., every 5 seconds)
-        setInterval(fetchSensorData, 1000);
+        setInterval(fetchSensorData, 5000);
     });
 </script>
 </html>

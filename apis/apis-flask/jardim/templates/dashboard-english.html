@@ -7,18 +7,7 @@
     Monitor and control the air and soil sensors, electricity, reservoirs, and environmental sensors of your garden conveniently and efficiently.
     Water your plants manually with a single click. 
     Switch between light and dark modes for a personalized experience.">
-    <script>
-        // Função para carregar a fonte assincronamente
-        function loadFontAsync() {
-          const link = document.createElement('link');
-          link.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
-          link.rel = 'stylesheet';
-          document.head.appendChild(link);
-        }
-      
-        // Chame a função para carregar a fonte assim que o DOM estiver pronto
-        document.addEventListener('DOMContentLoaded', loadFontAsync);
-      </script>
+    <link rel="preload" href="https://fonts.googleapis.com/icon?family=Material+Icons" as="style">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="icon" href="{{ url_for('static', filename='icon.png') }}" type="image/x-icon">
 

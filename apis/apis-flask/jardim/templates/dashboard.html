@@ -6,18 +6,7 @@
     <meta name="description" content="Bem-vindo ao Painel do Jardim Inteligente de Vegetais. 
     Monitore e controle os sensores de ar e solo, eletricidade, reservatórios e sensores ambientais do seu jardim de forma prática e eficiente. 
     Regue suas plantas manualmente com um clique. Alterne entre os modos claro e escuro para uma experiência personalizada.">
-    <script>
-        // Função para carregar a fonte assincronamente
-        function loadFontAsync() {
-          const link = document.createElement('link');
-          link.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
-          link.rel = 'stylesheet';
-          document.head.appendChild(link);
-        }
-      
-        // Chame a função para carregar a fonte assim que o DOM estiver pronto
-        document.addEventListener('DOMContentLoaded', loadFontAsync);
-      </script>
+    <link rel="preload" href="https://fonts.googleapis.com/icon?family=Material+Icons" as="style">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="icon" href="{{ url_for('static', filename='icon.png') }}" type="image/x-icon">
    

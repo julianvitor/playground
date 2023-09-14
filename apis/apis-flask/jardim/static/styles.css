@@ -18,6 +18,7 @@
             align-items: center;
             min-height: 100vh;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            transition: background-color 0.9s ease, color 0.9s ease; /* Transição para modo claro */
         }
         
 
@@ -25,11 +26,13 @@
         body.dark-mode {
             background-color: #000000;
             color: #ffffff;
+            transition: background-color 0.9s ease, color 0.9s ease; /* Transição para modo claro */
         }
 
         .container.dark-mode {
             background-color: #222222;
             color: #ffffff;
+            transition: background-color 0.9s ease, color 0.9s ease; /* Transição para modo claro */
         }
 
         /* Add styles for dark mode button */
@@ -41,11 +44,13 @@
             padding: 10px 20px;
             font-size: 18px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Transição para modo claro */
         }
 
         .dark-mode-button:hover {
             background-color: #444444;
+            box-shadow: 0 0 20px #485768;
+            transition: box-shadow 0.3s ease;
         }
 
         .container {
@@ -54,6 +59,7 @@
             padding: 30px;
             width: 80%;
             max-width: 550px; /* Adjust as needed for your design */
+            transition: background-color 0.9s ease, color 0.9s ease; /* Transição para modo claro */
         }
         .center-container {
             margin: 0 auto; /* Centraliza horizontalmente o elemento */
@@ -69,7 +75,7 @@
             padding: 10px 20px;
             font-size: 18px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.5s ease;
             text-decoration: none; /* Remover sublinhado de link */
             display: inline-block; /* Tornar o botão um elemento de bloco para definir largura e margem */
             margin-top: 20px; /* Adicionar margem superior para separá-lo dos outros elementos */
@@ -77,6 +83,8 @@
     
         #language-switch-btn:hover {
             background-color: #0055b3;
+            box-shadow: 0 0 15px #0055b3;
+            transition: box-shadow 0.5s ease;
         }
         .water-button {
             background-color: #007aff;
@@ -85,13 +93,14 @@
             border-radius: 5px;
             padding: 10px 20px;
             font-size: 18px;
-    
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, box-shadow 0.5s ease; /* Adicione a transição para background-color e box-shadow */
         }
         
         .water-button:hover {
-            background-color: #0055b3;
+            background-color: #02438c;
+            box-shadow: 0 0 60px #0055b3;
+            transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Adicione a transição para background-color e box-shadow no hover */
         }
              
         header {

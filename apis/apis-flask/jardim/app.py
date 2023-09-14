@@ -1,8 +1,9 @@
 import random
 from flask import Flask, jsonify, request, render_template
+from flask_minify import Minify
 
 app = Flask(__name__)
-
+Minify(app=app, html=True, js=True, cssless=True)
 # Simulated sensor data
 def generate_sensor_data():
     return {

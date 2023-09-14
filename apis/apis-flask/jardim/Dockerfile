@@ -1,17 +1,23 @@
-# Use a imagem base Python 3.10
+# Use a imagem base Python 3.11
 FROM python:3.11
+
+# Atualize o sistema e instale o Git
+RUN apt-get update && apt-get install -y git
 
 # Defina o diretório de trabalho no contêiner
 WORKDIR /app
 
-# Copie tudo
-COPY . .
+# Clone o repositório Git
+RUN git clone https://github.com/julianvitor/playground.git
 
-# Instale as dependências do Flask
-RUN pip install -r requirements.txt
+# Copie o script de inicialização para o contêiner
+COPY /app/playground/apis/apis-flask/jardim/startup.sh /app/startup.sh
 
-# Exponha a porta em que o aplicativo Flask está sendo executado
+# Torne o script de inicialização executável
+RUN chmod +x /app/startup.sh
+
+# Exponha a porta em que o aplicativo Flask está sendo executado (se necessário)
 EXPOSE 5000
 
-# Comando para executar o aplicativo Flask
-CMD ["python", "app.py"]
+# Comando para executar o script de inicialização
+CMD ["/bin/bash", "/app/startup.sh"]

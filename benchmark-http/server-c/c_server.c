@@ -5,8 +5,10 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
+#include <fcntl.h>
+#include <sys/select.h>
 
-#define MAX_BUFFER_SIZE 1024
+#define MAX_BUFFER_SIZE 4096
 #define MAX_RESPONSE_SIZE 2048
 
 void error(const char *msg) {
@@ -48,37 +50,55 @@ int main(int argc, char *argv[]) {
         if (newsockfd < 0)
             error("Erro ao aceitar conexão.");
 
+        fcntl(newsockfd, F_SETFL, O_NONBLOCK);
+
         bzero(buffer, sizeof(buffer));
-        n = read(newsockfd, buffer, sizeof(buffer) - 1);
-        if (n < 0)
-            error("Erro ao ler do socket.");
 
-        printf("Solicitação HTTP recebida:\n%s\n", buffer);
+        fd_set read_fds;
+        FD_ZERO(&read_fds);
+        FD_SET(newsockfd, &read_fds);
+        struct timeval timeout;
+        timeout.tv_sec = 5; // Tempo limite de 5 segundos
 
-        // Construa a resposta JSON com informações de 10 pessoas
-        const char *json_response = "["
-            "{\"nome\": \"João\", \"idade\": 32, \"endereco\": \"Rua A, Cidade A\", \"telefone\": \"(11) 1234-5678\", \"cpf\": \"123.456.789-01\"},"
-            "{\"nome\": \"Maria\", \"idade\": 28, \"endereco\": \"Rua B, Cidade B\", \"telefone\": \"(22) 9876-5432\", \"cpf\": \"987.654.321-02\"},"
-            "{\"nome\": \"Pedro\", \"idade\": 45, \"endereco\": \"Rua C, Cidade C\", \"telefone\": \"(33) 5678-1234\", \"cpf\": \"567.123.890-03\"},"
-            "{\"nome\": \"Ana\", \"idade\": 29, \"endereco\": \"Rua D, Cidade D\", \"telefone\": \"(44) 4321-8765\", \"cpf\": \"432.567.901-04\"},"
-            "{\"nome\": \"Carlos\", \"idade\": 38, \"endereco\": \"Rua E, Cidade E\", \"telefone\": \"(55) 8765-4321\", \"cpf\": \"876.890.123-05\"},"
-            "{\"nome\": \"Julia\", \"idade\": 27, \"endereco\": \"Rua F, Cidade F\", \"telefone\": \"(66) 9870-1234\", \"cpf\": \"987.123.456-06\"},"
-            "{\"nome\": \"Lucas\", \"idade\": 35, \"endereco\": \"Rua G, Cidade G\", \"telefone\": \"(77) 5432-8765\", \"cpf\": \"543.901.234-07\"},"
-            "{\"nome\": \"Isabel\", \"idade\": 42, \"endereco\": \"Rua H, Cidade H\", \"telefone\": \"(88) 1234-5678\", \"cpf\": \"123.890.567-08\"},"
-            "{\"nome\": \"Rafael\", \"idade\": 31, \"endereco\": \"Rua I, Cidade I\", \"telefone\": \"(99) 5678-1234\", \"cpf\": \"567.234.890-09\"},"
-            "{\"nome\": \"Camila\", \"idade\": 26, \"endereco\": \"Rua J, Cidade J\", \"telefone\": \"(00) 8765-4321\", \"cpf\": \"876.567.123-10\"}"
-        "]";
+        n = select(newsockfd + 1, &read_fds, NULL, NULL, &timeout);
+        
+        if (n == -1) {
+            error("Erro ao selecionar.");
+        } else if (n == 0) {
+            // Tempo limite atingido, nada a ler
+        } else {
+            if (FD_ISSET(newsockfd, &read_fds)) {
+                n = read(newsockfd, buffer, sizeof(buffer) - 1);
+                if (n < 0)
+                    error("Erro ao ler do socket.");
+                printf("Solicitação HTTP recebida:\n%s\n", buffer);
 
-        // Construir a resposta HTTP
-        char response[MAX_RESPONSE_SIZE];
-        snprintf(response, sizeof(response), "HTTP/1.1 200 OK\r\n"
-                                            "Content-Type: application/json\r\n"
-                                            "Content-Length: %ld\r\n\r\n%s",
-                 strlen(json_response), json_response);
+                // Construa a resposta JSON com informações de 10 pessoas
+                const char *json_response = "["
+                    "{\"nome\": \"João\", \"idade\": 32, \"endereco\": \"Rua A, Cidade A\", \"telefone\": \"(11) 1234-5678\", \"cpf\": \"123.456.789-01\"},"
+                    "{\"nome\": \"Maria\", \"idade\": 28, \"endereco\": \"Rua B, Cidade B\", \"telefone\": \"(22) 9876-5432\", \"cpf\": \"987.654.321-02\"},"
+                    "{\"nome\": \"Pedro\", \"idade\": 45, \"endereco\": \"Rua C, Cidade C\", \"telefone\": \"(33) 5678-1234\", \"cpf\": \"567.123.890-03\"},"
+                    "{\"nome\": \"Ana\", \"idade\": 29, \"endereco\": \"Rua D, Cidade D\", \"telefone\": \"(44) 4321-8765\", \"cpf\": \"432.567.901-04\"},"
+                    "{\"nome\": \"Carlos\", \"idade\": 38, \"endereco\": \"Rua E, Cidade E\", \"telefone\": \"(55) 8765-4321\", \"cpf\": \"876.890.123-05\"},"
+                    "{\"nome\": \"Julia\", \"idade\": 27, \"endereco\": \"Rua F, Cidade F\", \"telefone\": \"(66) 9870-1234\", \"cpf\": \"987.123.456-06\"},"
+                    "{\"nome\": \"Lucas\", \"idade\": 35, \"endereco\": \"Rua G, Cidade G\", \"telefone\": \"(77) 5432-8765\", \"cpf\": \"543.901.234-07\"},"
+                    "{\"nome\": \"Isabel\", \"idade\": 42, \"endereco\": \"Rua H, Cidade H\", \"telefone\": \"(88) 1234-5678\", \"cpf\": \"123.890.567-08\"},"
+                    "{\"nome\": \"Rafael\", \"idade\": 31, \"endereco\": \"Rua I, Cidade I\", \"telefone\": \"(99) 5678-1234\", \"cpf\": \"567.234.890-09\"},"
+                    "{\"nome\": \"Camila\", \"idade\": 26, \"endereco\": \"Rua J, Cidade J\", \"telefone\": \"(00) 8765-4321\", \"cpf\": \"876.567.123-10\"}"
+                "]";
 
-        n = write(newsockfd, response, strlen(response));
-        if (n < 0)
-            error("Erro ao escrever no socket.");
+                // Construir a resposta HTTP
+                char response[MAX_RESPONSE_SIZE];
+                snprintf(response, sizeof(response), "HTTP/1.1 200 OK\r\n"
+                                                    "Content-Type: application/json\r\n"
+                                                    "Content-Length: %ld\r\n\r\n%s",
+                         strlen(json_response), json_response);
+
+                n = write(newsockfd, response, strlen(response));
+                if (n < 0)
+                    error("Erro ao escrever no socket.");
+            }
+        }
 
         close(newsockfd);
     }

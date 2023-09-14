@@ -1,0 +1,115 @@
+<style>
+        body {
+            font-family: 'Helvetica Neue', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        /* Light mode styles */
+        body.light-mode {
+            background-color: #f2f2f2;
+            color: #333333;
+        }
+
+        .container.light-mode {
+            background-color: #ffffff;
+            color: #333333;
+        }
+
+        /* Dark mode styles */
+        body.dark-mode {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        .container.dark-mode {
+            background-color: #222222;
+            color: #ffffff;
+        }
+
+        /* Add styles for dark mode button */
+        .dark-mode-button {
+            background-color: #333333;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dark-mode-button:hover {
+            background-color: #444444;
+        }
+
+        .container {
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 80%;
+            max-width: 400px; /* Adjust as needed for your design */
+        }
+        .center-container {
+            margin: 0 auto; /* Centraliza horizontalmente o elemento */
+        }
+        .water-plant {
+            margin-top: 20px;
+        }
+        
+        .water-button {
+            background-color: #007aff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .water-button:hover {
+            background-color: #0055b3;
+        }
+             
+        header {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            color: #333333;
+        }
+
+        section {
+            margin-top: 20px;
+        }
+
+        h2 {
+            font-size: 20px;
+            color: #333333;
+        }
+
+        .sensor-item {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        i.material-icons {
+            font-size: 24px;
+            margin-right: 10px;
+            color: #007aff; /* Apple's signature blue color */
+        }
+
+        span {
+            font-size: 18px;
+            color: #666666;
+        }
+    </style>

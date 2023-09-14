@@ -215,6 +215,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+bin/
 develop-eggs/
 dist/
 downloads/
@@ -318,6 +319,11 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+bin/**
+bin/*
+bin/**
+/apis/apis-flask/flask-api/bin/**
+/apis/apis-flask/flask-api/
 
 # Spyder project settings
 .spyderproject
@@ -348,3 +354,4 @@ cython_debug/
 # outras pastas
 playground/
 
+flask-api/

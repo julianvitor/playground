@@ -22,6 +22,11 @@ def generate_sensor_data():
 def index():
     return render_template('dashboard.html')
 
+@app.route('/english')
+def index_en():
+    return render_template('dashboard-english.html')
+
+
 @app.route('/sensor-data', methods=['GET'])
 def get_sensor_data():
     sensor_data = generate_sensor_data()

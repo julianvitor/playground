@@ -11,7 +11,7 @@ WORKDIR /app
 RUN git clone https://github.com/julianvitor/playground.git
 
 # Copie o script de inicialização para o contêiner
-COPY /app/playground/apis/apis-flask/jardim/startup.sh /app/startup.sh
+COPY apis/apis-flask/jardim/startup.sh /app/startup.sh
 
 # Torne o script de inicialização executável
 RUN chmod +x /app/startup.sh

@@ -42,8 +42,7 @@ def get_sensor_data():
 
 @app.route('/water-plant', methods=['POST'])
 def water_plant():
-    # You can add logic here to simulate plant watering
-    response = {"message": "Plant manually watered!"}
+    response = {"message": "planta regada"}
     return jsonify(response)
 
 if __name__ == '__main__':

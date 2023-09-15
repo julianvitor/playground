@@ -26,6 +26,7 @@
         }
     </style>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="/static/script.js"></script>
 </head>
 <body>
     <div class="container center-container">
@@ -43,115 +44,4 @@
         </section>
     </div>
 </body>
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const waterButton = document.getElementById("water-button");
-        const sensorContainer = document.getElementById("sensor-container");
-        const darkModeToggle = document.getElementById("dark-mode-toggle");
-        const container = document.querySelector(".container");
-        const body = document.body;
-        const preferredMode = localStorage.getItem("preferredMode");
-        
-        function setMode(mode) {
-            if (mode === "dark") {
-                container.classList.add("dark-mode");
-                body.classList.add("dark-mode");
-                darkModeToggle.innerText = "Light Mode";
-            } else {
-                container.classList.remove("dark-mode");
-                body.classList.remove("dark-mode");
-                darkModeToggle.innerText = "Dark Mode";
-            }
-            // Save the user's preference
-            localStorage.setItem("preferredMode", mode);
-        }
-
-    // Event listener for the dark mode toggle button
-        darkModeToggle.addEventListener("click", function () {
-            if (body.classList.contains("dark-mode")) {
-                setMode("light");
-            } else {
-                setMode("dark");
-            }
-        });
-
-    // Set the initial mode based on the user's preference or system preference
-        if (preferredMode === "dark" || (preferredMode === null && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-            setMode("dark");
-        } else {
-            setMode("light");
-        } 
-        // Function to fetch sensor data from the Flask API
-        function fetchSensorData() {
-            fetch('/sensor-data')
-                .then((response) => response.json())
-                .then((data) => {
-                    // Update the sensor data on the page
-                    sensorContainer.innerHTML = `
-                        <h2>Air & Soil Sensors</h2>
-                        <div class="sensor-item">
-                            <i class="material-icons">thermostat</i>
-                            <span>Air Temperature: ${data.air_temperature}</span>
-                        </div>
-                        <div class="sensor-item">
-                            <i class="material-icons">thermostat</i>
-                            <span>Soil Temperature: ${data.soil_temperature}</span>
-                        </div>
-                        <div class="sensor-item">
-                            <i class="material-icons">invert_colors</i>
-                            <span>Soil PH: ${data.soil_ph}</span>
-                        </div>
-                        <div class="sensor-item">
-                            <i class="material-icons">wb_sunny</i>
-                            <span>Air Humidity: ${data.air_humidity}</span>
-                        </div>
-                        <div class="sensor-item">
-                            <i class="material-icons">opacity</i>
-                            <span>Soil Moisture: ${data.soil_moisture}</span>
-                        </div>
-                        
-                        <h2>Electricity & Reservoirs</h2>
-                        <div class="sensor-item">
-                            <i class="material-icons">power</i>
-                            <span>Electrical Consumption: ${data.electrical_consumption}</span>
-                        </div>
-                        <div class="sensor-item">
-                            <i class="material-icons">local_drink</i>
-                            <span>Reservoir Level 1: ${data.reservoir_level_1}</span>
-                        </div>
-                        <div class="sensor-item">
-                            <i class="material-icons">local_drink</i>
-                            <span>Reservoir Level 2: ${data.reservoir_level_2}</span>
-                        </div>
-                        
-                        <h2>Environmental Sensors</h2>
-                        <div class="sensor-item">
-                            <i class="material-icons">cloud</i>
-                            <span>CO2 Level: ${data.co2_level}</span>
-                        </div>
-                        <div class="sensor-item">
-                            <i class="material-icons">wb_incandescent</i>
-                            <span>Light Level: ${data.light_level}</span>
-                        </div>
-                    `;
-                });
-        }
-
-        // Event listener for the "Manually Water Plant" button
-        waterButton.addEventListener("click", function () {
-            fetch('/water-plant', { method: 'POST' })
-                .then((response) => response.json())
-                .then((data) => {
-                    // Display a message indicating the plant was watered
-                    alert(data.message);
-                });
-        });
-
-        // Fetch initial sensor data when the page loads
-        fetchSensorData();
-
-        // Set up a timer to fetch sensor data periodically (e.g., every 5 seconds)
-        setInterval(fetchSensorData, 5000);
-    });
-</script>
 </html>

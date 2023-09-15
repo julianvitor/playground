@@ -7,16 +7,16 @@ Minify(app=app, html=True, js=True, cssless=True)
 # Simulated sensor data
 def generate_sensor_data():
     return {
-        "air_temperature": f"{random.uniform(20, 30):.1f}°C",
-        "soil_temperature": f"{random.uniform(15, 25):.1f}°C",
-        "soil_ph": f"{random.uniform(5, 8):.2f}",
+        "air_temp": f"{random.uniform(20, 30):.1f}°C",
+        "soil_temp": f"{random.uniform(15, 25):.1f}°C",
+        "ph": f"{random.uniform(5, 8):.2f}",
         "air_humidity": f"{random.uniform(40, 70):.1f}%",
         "soil_moisture": f"{random.uniform(30, 60):.1f}%",
         "electrical_consumption": f"{random.uniform(10, 20):.2f} kWh",
-        "reservoir_level_1": f"{random.uniform(50, 90):.1f}%",
-        "reservoir_level_2": f"{random.uniform(40, 80):.1f}%",
-        "co2_level": f"{random.randint(300, 500)} ppm",
-        "light_level": f"{random.randint(500, 1000)} Lux",
+        "reservoir_l1": f"{random.uniform(50, 90):.1f}%",
+        "reservoir_l2": f"{random.uniform(40, 80):.1f}%",
+        "co2": f"{random.randint(300, 500)} ppm",
+        "light": f"{random.randint(500, 1000)} Lux",
     }
 
 @app.route('/')

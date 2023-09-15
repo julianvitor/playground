@@ -46,15 +46,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     <h2>Sensores de Ar e Solo</h2>
                     <div class="sensor-item">
                         <i class="material-icons">thermostat</i>
-                        <span>Temperatura do Ar: ${data.air_temperature}</span>
+                        <span>Temperatura do Ar: ${data.air_temp}</span>
                     </div>
                     <div class="sensor-item">
                         <i class="material-icons">thermostat</i>
-                        <span>Temperatura do Solo: ${data.soil_temperature}</span>
+                        <span>Temperatura do Solo: ${data.soil_temp}</span>
                     </div>
                     <div class="sensor-item">
                         <i class="material-icons">invert_colors</i>
-                        <span>pH do Solo: ${data.soil_ph}</span>
+                        <span>pH do Solo: ${data.ph}</span>
                     </div>
                     <div class="sensor-item">
                         <i class="material-icons">wb_sunny</i>
@@ -72,21 +72,21 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                     <div class="sensor-item">
                         <i class="material-icons">local_drink</i>
-                        <span>Nível do Reservatório 1: ${data.reservoir_level_1}</span>
+                        <span>Nível do Reservatório 1: ${data.reservoir_l1}</span>
                     </div>
                     <div class="sensor-item">
                         <i class="material-icons">local_drink</i>
-                        <span>Nível do Reservatório 2: ${data.reservoir_level_2}</span>
+                        <span>Nível do Reservatório 2: ${data.reservoir_l2}</span>
                     </div>
                     
                     <h2>Sensores Ambientais</h2>
                     <div class="sensor-item">
                         <i class="material-icons">cloud</i>
-                        <span>Nível de CO2: ${data.co2_level}</span>
+                        <span>Nível de CO2: ${data.co2}</span>
                     </div>
                     <div class="sensor-item">
                         <i class="material-icons">wb_incandescent</i>
-                        <span>Nível de Luz: ${data.light_level}</span>
+                        <span>Nível de Luz: ${data.light}</span>
                     </div>
                 `;
             });

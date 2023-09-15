@@ -17,18 +17,18 @@ document.addEventListener("DOMContentLoaded", function () {
             lightMode: "Light Mode",
             manualWatering: "Manual Watering",
             sensorSection: "Air and Soil Sensors",
-            airTemperature: "Air Temperature",
-            soilTemperature: "Soil Temperature",
-            soilPH: "Soil pH",
+            airTemp: "Air Temp",
+            soilTemp: "Soil Temp",
+            ph: "Soil ph",
             airHumidity: "Air Humidity",
             soilMoisture: "Soil Moisture",
             electricitySection: "Electricity and Reservoirs",
             electricalConsumption: "Electrical Consumption",
-            reservoirLevel1: "Reservoir Level 1",
-            reservoirLevel2: "Reservoir Level 2",
+            reservoirl1: "Reservoir Level 1",
+            reservoirl2: "Reservoir Level 2",
             environmentalSensors: "Environmental Sensors",
-            co2Level: "CO2 Level",
-            lightLevel: "Light Level",
+            co2: "CO2 Level",
+            light: "Light Level",
         },
         // Traduções para o português
         portuguese: {
@@ -36,18 +36,18 @@ document.addEventListener("DOMContentLoaded", function () {
             lightMode: "Modo Claro",
             manualWatering: "Regar Manualmente",
             sensorSection: "Sensores de Ar e Solo",
-            airTemperature: "Temperatura do Ar",
-            soilTemperature: "Temperatura do Solo",
-            soilPH: "pH do Solo",
+            airTemp: "Temperatura do Ar",
+            soilTemp: "Temperatura do Solo",
+            ph: "ph do Solo",
             airHumidity: "Umidade do Ar",
             soilMoisture: "Umidade do Solo",
             electricitySection: "Eletricidade e Reservatórios",
             electricalConsumption: "Consumo de Eletricidade",
-            reservoirLevel1: "Nível do Reservatório 1",
-            reservoirLevel2: "Nível do Reservatório 2",
+            reservoirl1: "Nível do Reservatório 1",
+            reservoirl2: "Nível do Reservatório 2",
             environmentalSensors: "Sensores Ambientais",
-            co2Level: "Nível de CO2",
-            lightLevel: "Nível de Luz",
+            co2: "Nível de CO2",
+            light: "Nível de Luz",
         },
     };
 
@@ -98,15 +98,15 @@ document.addEventListener("DOMContentLoaded", function () {
             <h2>${translatedText[preferredLanguage].sensorSection}</h2>
             <div class="sensor-item">
                 <i class="material-icons">thermostat</i>
-                <span>${translatedText[preferredLanguage].airTemperature}: ${data.air_temperature}</span>
+                <span>${translatedText[preferredLanguage].airTemp}: ${data.air_temp}</span>
             </div>
             <div class="sensor-item">
                 <i class="material-icons">thermostat</i>
-                <span>${translatedText[preferredLanguage].soilTemperature}: ${data.soil_temperature}</span>
+                <span>${translatedText[preferredLanguage].soilTemp}: ${data.soil_temp}</span>
             </div>
             <div class="sensor-item">
                 <i class="material-icons">invert_colors</i>
-                <span>${translatedText[preferredLanguage].soilPH}: ${data.soil_ph}</span>
+                <span>${translatedText[preferredLanguage].ph}: ${data.ph}</span>
             </div>
             <div class="sensor-item">
                 <i class="material-icons">wb_sunny</i>
@@ -124,21 +124,20 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="sensor-item">
                 <i class="material-icons">local_drink</i>
-                <span>${translatedText[preferredLanguage].reservoirLevel1}: ${data.reservoir_level_1}</span>
-            </div>
-            <div class="sensor-item">
+                <span>${translatedText[preferredLanguage].reservoirl1}: ${data.reservoir_l1}</span>
+            </di         <div class="sensor-item">
                 <i class="material-icons">local_drink</i>
-                <span>${translatedText[preferredLanguage].reservoirLevel2}: ${data.reservoir_level_2}</span>
+                <span>${translatedText[preferredLanguage].reservoirl2}: ${data.reservoir_l2}</span>
             </div>
 
             <h2>${translatedText[preferredLanguage].environmentalSensors}</h2>
             <div class="sensor-item">
                 <i class="material-icons">cloud</i>
-                <span>${translatedText[preferredLanguage].co2Level}: ${data.co2_level}</span>
+                <span>${translatedText[preferredLanguage].co2}: ${data.co2_level}</span>
             </div>
             <div class="sensor-item">
                 <i class="material-icons">wb_incandescent</i>
-                <span>${translatedText[preferredLanguage].lightLevel}: ${data.light_level}</span>
+                <span>${translatedText[preferredLanguage].light}: ${data.light_level}</span>
             </div>
         `;
     }

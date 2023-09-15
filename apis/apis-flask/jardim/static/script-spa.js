@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchAndUpdateSensorData();
 
     // Configurar um temporizador para buscar dados do sensor periodicamente (por exemplo, a cada 5 segundos)
-    setInterval(fetchAndUpdateSensorData, 5000);
+    setInterval(fetchAndUpdateSensorData, 800);
 
     // Event listener para alternar entre inglês e português
     const languageSwitchBtn = document.getElementById("language-switch-btn");

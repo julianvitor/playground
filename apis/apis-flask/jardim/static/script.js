@@ -5,7 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const container = document.querySelector(".container");
     const body = document.body;
     const preferredMode = localStorage.getItem("preferredMode");
-    
+
+
+
     function setMode(mode) {
         if (mode === "dark") {
             container.classList.add("dark-mode");
@@ -43,7 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
             .then((data) => {
                 // Atualizar os dados do sensor na página
                 sensorContainer.innerHTML = `
-                    <h2>Sensores de Ar e Solo</h2>
+                
+                <span>Sensores de Ar e Solo</span>
                     <div class="sensor-item">
                         <i class="material-icons">thermostat</i>
                         <span>Temperatura do Ar: ${data.air_temp}</span>
@@ -106,5 +109,5 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchSensorData();
 
     // Configurar um temporizador para buscar dados do sensor periodicamente (por exemplo, a cada 5 segundos)
-    setInterval(fetchSensorData, 5000);
+    setInterval(fetchSensorData, 7000);
 });

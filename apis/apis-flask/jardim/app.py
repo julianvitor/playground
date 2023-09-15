@@ -1,6 +1,7 @@
 import random
 from flask import Flask, jsonify, request, render_template
 from flask_minify import Minify
+from flask import send_file
 
 app = Flask(__name__)
 Minify(app=app, html=True, js=True, cssless=True)
@@ -34,6 +35,13 @@ def index_spa():
 @app.route('/spa-min')
 def index_spa_min():
     return render_template('dashboard-spa-min.html')
+
+
+
+@app.route('/robots.txt')
+def serve_robots():
+    return send_file('robots.txt')
+
 
 @app.route('/sensor-data', methods=['GET'])
 def get_sensor_data():

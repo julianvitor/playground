@@ -13,12 +13,13 @@ document.addEventListener("DOMContentLoaded", function () {
     const translatedText = {
         // Traduções para o inglês
         english: {
+            garden: "Garden",
             darkMode: "Dark Mode",
             lightMode: "Light Mode",
             manualWatering: "Manual Watering",
             sensorSection: "Air and Soil Sensors",
-            airTemp: "Air Temp",
-            soilTemp: "Soil Temp",
+            airTemp: "Air Temperature",
+            soilTemp: "Soil Temperature",
             ph: "Soil ph",
             airHumidity: "Air Humidity",
             soilMoisture: "Soil Moisture",
@@ -32,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         // Traduções para o português
         portuguese: {
+            garden: "Jardim",
             darkMode: "Modo Escuro",
             lightMode: "Modo Claro",
             manualWatering: "Regar Manualmente",
@@ -167,6 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Atualize os textos na página com base no novo idioma
         darkModeToggle.innerText = translatedText[preferredLanguage].darkMode;
         waterButton.innerText = translatedText[preferredLanguage].manualWatering;
+        garden.innerText = translatedText[preferredLanguage].garden;
 
         // Atualize o texto do botão de alternância de idioma
         languageSwitchBtn.innerText = preferredLanguage === "english" ? "Português" : "English";

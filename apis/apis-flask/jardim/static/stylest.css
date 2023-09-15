@@ -1,0 +1,209 @@
+/* Definição de fonte padrão */
+@font-face {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Estilos padrão para elementos de texto e contêineres */
+body, h1, h2, span, div {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+/* Estilos do corpo da página */
+body {
+    background-color: #9f9f9f;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    transition: background-color 0.9s ease, color 0.9s ease; /* Transição para modo claro */
+}
+
+/* Estilos para o modo escuro */
+body.dark-mode {
+    background-color: #000000;
+    color: #ffffff;
+    transition: background-color 0.9s ease, color 0.9s ease; /* Transição para modo claro */
+}
+
+.container.dark-mode {
+    background-color: #222222;
+    color: #ffffff;
+    transition: background-color 1.5s ease, color 1.5s ease, box-shadow 1s ease; /* Agrupamento das transições */
+
+}
+
+/* Estilos do contêiner principal */
+.container {
+    background-color: #dddddd;
+    box-shadow: 0 0 100px 2px rgba(0, 122, 255, 0.3);
+    border-radius: 16px;
+    padding: 30px;
+    width: 80%;
+    max-width: 550px; /* Ajuste conforme necessário para o seu design */
+    transition: background-color 1.5s ease, color 1.5s ease, box-shadow 1s ease; /* Agrupamento das transições */
+}
+
+.container:hover {
+    box-shadow: 0 0 200px 30px rgba(0,122,255,0.3);
+    border-radius: 16px;
+    padding: 30px;
+    width: 80%;
+    max-width: 550px;
+    transition: background-color 1.5s ease, color 1.5s ease, box-shadow 1s ease; /* Agrupamento das transições */}
+
+/* Estilos para centralizar o contêiner */
+.center-container {
+    margin: 0 auto;
+}
+
+/* Estilos para o botão de alternar entre modo claro e escuro */
+.dark-mode-button {
+    background-color: #333333;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transição para modo claro */
+}
+
+.dark-mode-button:hover {
+    background-color: #444444;
+    box-shadow: 0 0 20px #485768;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Estilos para outros elementos */
+.water-plant {
+    margin-top: 20px;
+}
+
+#language-switch-btn {
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+    text-decoration: none; /* Remover sublinhado de link */
+    display: inline-block; /* Tornar o botão um elemento de bloco para definir largura e margem */
+    margin-top: 20px; /* Adicionar margem superior para separá-lo dos outros elementos */
+}
+
+#language-switch-btn:hover {
+    background-color: #0055b3;
+    box-shadow: 0 0 15px #0055b3;
+    transition: box-shadow 0.5s ease;
+}
+
+/* Estilos para botão "water-button" */
+.water-button {
+    background-color: #007aff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.5s ease; /* Transição para background-color e box-shadow */
+}
+
+.water-button:hover {
+    background-color: #02438c;
+    box-shadow: 0 0 60px #0055b3;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Transição para background-color e box-shadow no hover */
+}
+
+/* Estilos para cabeçalho e subtítulos */
+header {
+    text-align: center;
+}
+
+h1 {
+    font-family: system-ui;
+    font-size: 50px;
+    color: #666666;
+}
+
+section {
+    margin-top: 20px;
+}
+
+h2 {
+    font-size: 20px;
+    color: #666666;
+}
+
+/* Estilos para itens de sensor */
+.sensor-item {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+i.material-icons {
+    font-size: 24px;
+    margin-right: 10px;
+    color: #007aff; /* Cor azul característica da Apple */
+}
+
+span {
+    font-size: 18px;
+    color: #777777;
+}
+
+/* Estilo do switch */
+.switch {
+    position: relative;
+    display: flex;
+    width: 60px;
+    height: 34px;
+    margin-right: 1000px;
+  }
+  
+  /* Estilo do slider (o botão que desliza) */
+  .switch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #666666; /* Cor de fundo padrão (escuro) */
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+  
+  /* Estilo do slider quando está no modo escuro */
+  .switch .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #fff; /* Cor do botão no modo escuro */
+    transition: 0.4s;
+    border-radius: 50%;
+    transform: translateX(0);
+  }
+  
+  /* Estilo para o estado do botão quando o input[type="checkbox"] está marcado no modo claro */
+  .switch input:checked + .slider {
+    background-color: #444444; /* Cor de fundo do slider no modo claro */
+  }
+  
+  /* Estilo para o estado do botão quando o input[type="checkbox"] está marcado no modo escuro */
+  .switch input:checked + .slider:before {
+    background-color: #fff; /* Cor do botão no modo claro */
+    transform: translateX(26px);
+  }

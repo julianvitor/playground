@@ -31,8 +31,12 @@
     <div class="container center-container">
         <header>
             <h1>Jardim</h1>
-            <button id="dark-mode-toggle" class="dark-mode-button">Modo Escuro</button>
-            <a href="english"><button id="language-switch-btn">English</button></a>
+            <label class="switch">
+                <input type="checkbox" id="dark-mode-toggle">
+                <span class="slider"></span>
+            </label>                   
+            <a href="english" style="vertical-align: middle;"><button id="language-switch-btn">English</button></a>
+            
         </header>
         <section class="sensor" id="sensor-container">
             <!-- Os dados do sensor serão inseridos aqui usando JavaScript -->

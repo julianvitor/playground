@@ -26,13 +26,14 @@ def index():
 @app.route('/english')
 def index_en():
     return render_template('dashboard-english.html')
+
 @app.route('/spa')
 def index_spa():
     return render_template('dashboard-spa.html')
+
 @app.route('/spa-min')
 def index_spa_min():
     return render_template('dashboard-spa-min.html')
-
 
 @app.route('/sensor-data', methods=['GET'])
 def get_sensor_data():

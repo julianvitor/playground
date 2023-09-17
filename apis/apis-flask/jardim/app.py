@@ -20,28 +20,25 @@ def generate_sensor_data():
         "light": f"{random.randint(500, 1000)} Lux",
     }
 
-@app.route('/')
+@app.route('/pt')
 def index():
     return render_template('dashboard.html')
 
-@app.route('/english')
+@app.route('/en')
 def index_en():
     return render_template('dashboard-english.html')
 
-@app.route('/spa')
+@app.route('/')
 def index_spa():
     return render_template('dashboard-spa.html')
 
-@app.route('/spa-min')
+@app.route('/min')
 def index_spa_min():
     return render_template('dashboard-spa-min.html')
-
-
 
 @app.route('/robots.txt')
 def serve_robots():
     return send_file('robots.txt')
-
 
 @app.route('/sensor-data', methods=['GET'])
 def get_sensor_data():
@@ -54,5 +51,4 @@ def water_plant():
     return jsonify(response)
 
 if __name__ == '__main__':
-    # Run the Flask app on 0.0.0.0 and port 8082
     app.run(host='0.0.0.0', port=5000, debug=True)

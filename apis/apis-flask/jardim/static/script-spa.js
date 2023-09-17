@@ -135,11 +135,11 @@ document.addEventListener("DOMContentLoaded", function () {
             <h2>${translatedText[preferredLanguage].environmentalSensors}</h2>
             <div class="sensor-item">
                 <i class="material-icons">cloud</i>
-                <span>${translatedText[preferredLanguage].co2}: ${data.co2_level}</span>
+                <span>${translatedText[preferredLanguage].co2}: ${data.co2}</span>
             </div>
             <div class="sensor-item">
                 <i class="material-icons">wb_incandescent</i>
-                <span>${translatedText[preferredLanguage].light}: ${data.light_level}</span>
+                <span>${translatedText[preferredLanguage].light}: ${data.light}</span>
             </div>
         `;
     }

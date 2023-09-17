@@ -6,12 +6,6 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Material Icons';
-    src: local('Material Icons'), local('MaterialIcons-Regular'),
-    url(https://fonts.googleapis.com/icon?family=Material+Icons) format('woff2');
-    font-display: swap;
-}
 
 /* Estilos de texto comuns */
 body, h1, h2, span, div {

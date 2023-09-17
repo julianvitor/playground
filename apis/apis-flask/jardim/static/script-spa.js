@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
+    console.log("DOMContentLoaded fired");
     const waterButton = document.getElementById("water-button");
     const sensorContainer = document.getElementById("sensor-container");
     const darkModeToggle = document.getElementById("dark-mode-toggle");
@@ -13,6 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const translatedText = {
         // Traduções para o inglês
         english: {
+            sensors:"Sensors",
             garden: "Garden",
             darkMode: "Dark Mode",
             lightMode: "Light Mode",
@@ -33,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         // Traduções para o português
         portuguese: {
+            sensors:"Sensores",
             garden: "Jardim",
             darkMode: "Modo Escuro",
             lightMode: "Modo Claro",
@@ -83,7 +86,6 @@ document.addEventListener("DOMContentLoaded", function () {
         setMode("light");
     }
 
-    // Função para buscar dados do sensor a partir da API do Flask e atualizar a página
     function fetchAndUpdateSensorData() {
         fetch('/sensor-data')
             .then((response) => response.json())
@@ -96,8 +98,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // Função para atualizar os dados dos sensores na página
     function updateSensorData(data) {
         // Atualizar os dados do sensor na página
-        sensorContainer.innerHTML = `
-            <h2>${translatedText[preferredLanguage].sensorSection}</h2>
+        var sensorData = `
+            
             <div class="sensor-item">
                 <i class="material-icons">thermostat</i>
                 <span>${translatedText[preferredLanguage].airTemp}: ${data.air_temp}</span>
@@ -127,7 +129,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="sensor-item">
                 <i class="material-icons">local_drink</i>
                 <span>${translatedText[preferredLanguage].reservoirl1}: ${data.reservoir_l1}</span>
-            </di         <div class="sensor-item">
+            </div>
+            <div class="sensor-item">
                 <i class="material-icons">local_drink</i>
                 <span>${translatedText[preferredLanguage].reservoirl2}: ${data.reservoir_l2}</span>
             </div>
@@ -137,28 +140,38 @@ document.addEventListener("DOMContentLoaded", function () {
                 <i class="material-icons">cloud</i>
                 <span>${translatedText[preferredLanguage].co2}: ${data.co2}</span>
             </div>
+            
             <div class="sensor-item">
                 <i class="material-icons">wb_incandescent</i>
                 <span>${translatedText[preferredLanguage].light}: ${data.light}</span>
             </div>
         `;
+         // Verifique se o sensorContainer está oculto antes de atualizá-lo
+         if (!sensorContainer.classList.contains("hidden")) {
+            sensorContainer.innerHTML = sensorData;}
     }
 
-    // Event listener para o botão "Regar Manualmente"
-    waterButton.addEventListener("click", function () {
-        fetch('/water-plant', { method: 'POST' })
-            .then((response) => response.json())
-            .then((data) => {
-                // Exibir uma mensagem indicando que a planta foi regada
-                alert(data.message);
-            });
-    });
+    // Event listener para o título "Sensores"
+    const sensorTitle = document.querySelector(".sensor-toggle");
+    const sensorList = document.getElementById("sensor-list");
+    const sensorToggleIcon = document.getElementById("sensor-toggle-icon");
 
+    sensorTitle.addEventListener("click", function () {
+        // Toggle para ocultar ou mostrar a lista de sensores
+        console.log("Sensor Title clicked");
+        sensorList.classList.toggle("hidden");
+        
+        // Gire a seta do ícone
+        sensorToggleIcon.classList.toggle("rotate-icon");
+        
+        // Adicione ou remova a classe "clicked" para a mudança de estilo
+        sensorTitle.classList.toggle("clicked");
+    });
     // Buscar dados do sensor inicialmente quando a página carrega
     fetchAndUpdateSensorData();
 
     // Configurar um temporizador para buscar dados do sensor periodicamente (por exemplo, a cada 5 segundos)
-    setInterval(fetchAndUpdateSensorData, 800);
+    setInterval(fetchAndUpdateSensorData, 5000);
 
     // Event listener para alternar entre inglês e português
     const languageSwitchBtn = document.getElementById("language-switch-btn");
@@ -170,8 +183,13 @@ document.addEventListener("DOMContentLoaded", function () {
         darkModeToggle.innerText = translatedText[preferredLanguage].darkMode;
         waterButton.innerText = translatedText[preferredLanguage].manualWatering;
         garden.innerText = translatedText[preferredLanguage].garden;
+        sensors.innerText = translatedText[preferredLanguage].sensors;
+
 
         // Atualize o texto do botão de alternância de idioma
         languageSwitchBtn.innerText = preferredLanguage === "english" ? "Português" : "English";
     });
+    
+    
+
 });

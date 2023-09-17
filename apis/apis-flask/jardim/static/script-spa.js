@@ -191,5 +191,20 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     
     
+    // Event listener para o botão de regar a planta
+    waterButton.addEventListener("click", function () {
+        // Enviar uma solicitação POST para a rota /water-plant da API
+        fetch("/water-plant", {
+            method: "POST",
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            // Exibir um alerta com a mensagem da API
+            alert(data.message);
+        })
+        .catch((error) => {
+            console.error("Erro ao enviar a solicitação:", error);
+        });
+    });
 
 });

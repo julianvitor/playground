@@ -3,6 +3,10 @@ package main
 import "fmt"
 
 func main(){
+	program()
+}
+
+func program(){
 	var TemperatureCelsius float64
 	var TemperatureFahrenheit float64
 	var Option int
@@ -29,7 +33,6 @@ func main(){
 			fmt.Printf("Invalid option.\n")
 		}
 	}
-	
 
 }
 

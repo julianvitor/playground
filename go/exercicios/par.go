@@ -2,13 +2,13 @@ package main
 
 import "fmt"
 
-func main(){
+func main() {
 	var a int
 	fmt.Scan(&a)
-	b:= a%2
-	if b>0{
+	b := a % 2
+	if b > 0 {
 		fmt.Println("impar")
-	}else{
+	} else {
 		fmt.Println("par")
 	}
 }

@@ -1,16 +1,17 @@
 package main
+
 import "fmt"
 
-func main(){
+func main() {
 	//array
-	var vetor [3] int
+	var vetor [3]int
 	vetor[0] = 1
 	vetor[1] = 2
 	vetor[2] = 3
 	fmt.Println(vetor)
 
 	//array com inicialização, declara e aloca valores
-	vetor2 := [3] int{1, 2, 3}
+	vetor2 := [3]int{1, 2, 3}
 	fmt.Println(vetor2)
 
 	// Acessando o valor de um array
@@ -33,15 +34,13 @@ func main(){
 	//slice append
 	slice2 = append(slice2, 4)
 	fmt.Println(slice2)
-	
+
 	//matriz
-	matrizSlice:=[][]int{
-		{1,2},
-		{3,42},
-		{7,8},
+	matrizSlice := [][]int{
+		{1, 2},
+		{3, 42},
+		{7, 8},
 	}
 	fmt.Print(matrizSlice[1][1])
-
-
 
 }
